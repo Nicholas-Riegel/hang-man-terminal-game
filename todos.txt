@@ -1,3 +1,0 @@
-1. need to fix how game ends
-2. add a score keeper
-3. add a limit to wrong answers?
