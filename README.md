@@ -1,5 +1,7 @@
 # hang-man-terminal-game
 
+In the game Hangman, the user is presented with the number of letters in a word that they have to guess the letters to. The number of letters in the word is indicated by the number of underscores, e.g. "_,_,_,_,_,_,_". The user has a certain number of chances to guess the right letter. The number of chances is also indicated with underscores. If the user gets a letter right, the letter is placed in the right place in the word. If the user gets a letter wrong, it is added to the wrong letters. I have about ten words to play with, and a score keeper keeps track of how many words the player got right and how many they didn't get. Players can exit the game at any time by typing 'exit' - all lower case. Enjoy!
+
 1. I began with a display function. It begins by clearing the console. Then it checks to see how many games or words have already be used, so the player can see how far along they are in the game. Then it displays the player's name, the number of games (words) they have played out of the total number of games played. It also shows their wins and losses. Then it shows the word to get. Initially it just shows spaces for each letter. Then it shows the wrong answers. Initially this is also just a list of dashes.
 
 `
