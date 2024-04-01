@@ -57,7 +57,14 @@ const setWordToGetArray = () => {
 	}
 }
 ```
-3. Next we also need to set the wrongAnswersArray, to keep track of the wrong letters the user has guessed. This function takes a number (set with the numWrongAnswers constant) and creates an array with that number of dashes to let the play know what wrong answers they have chosen and how many more wrong answers they have left.  
+3. The exit game function exits the game when it is called. I asked chatGPT how to exit out of a game even if the function is called in a loop in a function. And it said to use `process.exit()`. This will stop node from running. I needed something stronger than a 'return' or 'break' because I wanted it to kill the game even if it was in a loop in a function. A break or return statement would break out of the current loop or function, but that wouldn't necessarily end the game. It could go on to other thing.  
+```
+// This exits the game
+const exitGame = () => {
+	process.exit();
+}
+```
+4. Next we also need to set the wrongAnswersArray, to keep track of the wrong letters the user has guessed. This function takes a number (set with the numWrongAnswers constant) and creates an array with that number of dashes to let the play know what wrong answers they have chosen and how many more wrong answers they have left.  
 
 ```
 // This function sets the wrongAnswerArray
@@ -68,7 +75,7 @@ const setWrongAnswersArray = (num) => {
 }
 ```
 
-4. Then I begin the game. I clear the console. I make sure all the words in the array have a 'used' property set to false. I log a wecome message. I ask for the users name and tell them they can exit the game by typing 'exit' at any time. I set the players name. I set the WordToGetArray, the WrongAnswersArray, and call the chooseLetter function. 
+5. Then I begin the game. I clear the console. I make sure all the words in the array have a 'used' property set to false. I log a wecome message. I ask for the users name and tell them they can exit the game by typing 'exit' at any time. I set the players name. I set the WordToGetArray, the WrongAnswersArray, and call the chooseLetter function. 
 
 ```
 // This function begins the game
@@ -95,7 +102,7 @@ const beginGame = () => {
 	chooseLetter()
 }
 ```
-5. Then created the chooseLetter function. This begins by calling the display() function. It then declares and assigns a variable. I use a while loop to make sure the user enters a letter of the alphabet. Or the user can type 'exit' to exit the game. Once we get the users answers we check if it is one of the letters of the wordToGet. If it is, I call the correctAnswer function. If it is not, I call the wrongAnswer function.
+6. Then created the chooseLetter function. This begins by calling the display() function. It then declares and assigns a variable. I use a while loop to make sure the user enters a letter of the alphabet. Or the user can type 'exit' to exit the game. Once we get the users answers we check if it is one of the letters of the wordToGet. If it is, I call the correctAnswer function. If it is not, I call the wrongAnswer function.
 
 ```
 const chooseLetter = () => {
@@ -117,7 +124,7 @@ const chooseLetter = () => {
 }
 ```
 
-6. The correctAsnwer function begins by looping through the letters of the wordToGet and splicing the letter in the same index in the wordToGetArray. If the wordToGetArray doesn't have anymore underscores it changes the word's 'used' property to 'true' and calls the youWin() function. Otherwise it calls the chooseLetter function to let the user continue guessing letters. 
+7. The correctAsnwer function begins by looping through the letters of the wordToGet and splicing the letter in the same index in the wordToGetArray. If the wordToGetArray doesn't have anymore underscores it changes the word's 'used' property to 'true' and calls the youWin() function. Otherwise it calls the chooseLetter function to let the user continue guessing letters. 
 
 ```
 // This funciton is called if the user gets a correct letter
@@ -140,7 +147,7 @@ const correctAnswer = (answer) => {
 }
 ```
 
-7. The wrongAnswer function takes the users answer and splices it into the first index of the wrongAnswersArray that is an underscore. If there are no more underscores, the word's 'used' property is turned to 'true' and the youLose function is called. If there are more underscores, the player can continue to guess letters. 
+8. The wrongAnswer function takes the users answer and splices it into the first index of the wrongAnswersArray that is an underscore. If there are no more underscores, the word's 'used' property is turned to 'true' and the youLose function is called. If there are more underscores, the player can continue to guess letters. 
 
 ```
 // This function is called if user gets a wrong answer
@@ -164,7 +171,7 @@ const wrongAnswer = (answer) => {
 }
 ```
 
-8. The youWin function begins by incrementing the player's 'win' property. It then checks to see if there are other words to play. If there are, the display function is called and the user is asked if they want to keep on playing. If there are no more words to play, the console is cleared. the display function is called, the user is told that this is the end of the game and we exit the game. If there are more words to play and the user answers 'yes' then we set the wordToGetArray and the wrongAnswersArry to empty arrays, and then call setWordToGetArray(), setWrongAnswersArray(numWrongAnswers), and chooseLetter(), to play another word. If the user does not answer 'yes' then we exit the game. 
+9. The youWin function begins by incrementing the player's 'win' property. It then checks to see if there are other words to play. If there are, the display function is called and the user is asked if they want to keep on playing. If there are no more words to play, the console is cleared. the display function is called, the user is told that this is the end of the game and we exit the game. If there are more words to play and the user answers 'yes' then we set the wordToGetArray and the wrongAnswersArry to empty arrays, and then call setWordToGetArray(), setWrongAnswersArray(numWrongAnswers), and chooseLetter(), to play another word. If the user does not answer 'yes' then we exit the game. 
 
 ```
 const youWin = () => {
@@ -201,7 +208,7 @@ const youWin = () => {
 }
 ```
 
-9. The youLose function works in much the same way. First we increment the player's losses score. Then we check to see if there are more words to play. If there are, we ask if the player would like to continue playing. If there aren't we display the final score, indicate that we've reached the end of the game and exit the game. If there are more words to play and the user indicates that they want to continue playing, we set the arrays to empty arrays and call the same functions as in the youWin functions. 
+10. The youLose function works in much the same way. First we increment the player's losses score. Then we check to see if there are more words to play. If there are, we ask if the player would like to continue playing. If there aren't we display the final score, indicate that we've reached the end of the game and exit the game. If there are more words to play and the user indicates that they want to continue playing, we set the arrays to empty arrays and call the same functions as in the youWin functions. 
 
 ```
 // This function is called if the user loses
