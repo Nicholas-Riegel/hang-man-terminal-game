@@ -1,6 +1,10 @@
 const prompt = require("prompt-sync")()
 
+// This list is used later to make sure user enters a letter and not a number or some other character
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+// These are the words that will be used in the game
+// Later, another property will be added to each word to check if it has been used already or not
 const wordsArray = [
 	{
 		word: 'elephant',
@@ -34,26 +38,37 @@ const wordsArray = [
 	}
 ]
 
+// This is the word to get in the game
 let wordToGet = ''
+
+// This is the word to get array
+// It will display the right letters and spaces
 let wordToGetArray = []
+
+// This array displays the letters the user has gotten wrong
 let wrongAnswersArray = []
+
+// This is the allowable number of wrong answers
 const numWrongAnswers = 5
 
+// This is the player object and their score
 player = {
 	name: '',
 	wins: 0,
 	losses: 0
 }
 
-// to check how end of game works:
+// To check how end of game works:
 // for(let i = 0; i < wordsArray.length - 1; i++){
 // 	wordsArray[i].used = true;
 // }
 
+// This exits the game
 const exitGame = () => {
 	process.exit();
 }
 
+// This function displays the game
 const display = () => {
 	console.clear()
 	let numPlayed = 0
@@ -69,6 +84,7 @@ const display = () => {
 	console.log(`Wrong answers: ${wrongAnswersArray}`);	
 }
 
+// This function sets the wordToGetArray
 const setWordToGetArray = () => {
 	if (wordsArray.some(x => x.used === false)){
 		for(let i = 0; i < wordsArray.length; i++){
@@ -86,13 +102,14 @@ const setWordToGetArray = () => {
 	}
 }
 
+// This function sets the wrongAnswerArray
 const setWrongAnswersArray = (num) => {
 	for(let i = 0; i < num; i++){
 		wrongAnswersArray.push('_')
 	}
 }
 
-
+// This function begins the game
 const beginGame = () => {
 	
 	console.clear()
@@ -109,7 +126,6 @@ const beginGame = () => {
 	
 	player.name = username;
 	
-	
 	setWordToGetArray()
 
 	setWrongAnswersArray(numWrongAnswers)
@@ -117,6 +133,7 @@ const beginGame = () => {
 	chooseLetter()
 }
 
+// This function allows the user to choose a letter
 const chooseLetter = () => {
   
 	display()
@@ -135,6 +152,7 @@ const chooseLetter = () => {
 	}
 }
 
+// This funciton is called if the user gets a correct letter
 const correctAnswer = (answer) => {
 	for(let i = 0; i < wordToGet.length; i++){
 		if (answer === wordToGet[i]){
@@ -153,6 +171,7 @@ const correctAnswer = (answer) => {
 	}
 }
 
+// This function is called if user gets a wrong answer
 const wrongAnswer = (answer) => {
 	for (let i = 0; i < wrongAnswersArray.length; i++){
 		if (wrongAnswersArray[i] === '_'){
@@ -172,6 +191,7 @@ const wrongAnswer = (answer) => {
 	}
 }
 
+// This function is called if the user wins
 const youWin = () => {
 	
 	player.wins++
@@ -179,7 +199,7 @@ const youWin = () => {
 	if (wordsArray.some(x => x.used === false)){	
 		display()
 		console.log(`Congratulations! You win!`);
-		console.log('Would you like to play again?');
+		console.log('Would you like to keep playing?');
 	} else {
 		console.clear()
 		display()
@@ -205,6 +225,7 @@ const youWin = () => {
 	}
 }
 
+// This function is called if the user loses
 const youLose = () => {
 	
 	player.losses++
